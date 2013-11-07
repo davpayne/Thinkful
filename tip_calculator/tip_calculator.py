@@ -7,8 +7,8 @@
 from optparse import OptionParser
 
 parser = OptionParser()
-parser.add_option("-f", "--first", dest="meal_cost", help="the meal cost", type = "float")
-parser.add_option("-s", "--second", dest="tax_rate", help="the tax rate", type = "float")
+parser.add_option("-m", "--first", dest="meal_cost", help="the meal cost", type = "float")
+parser.add_option("-x", "--second", dest="tax_rate", help="the tax rate", type = "float")
 parser.add_option("-t", "--third", dest="tip_rate", help="the tip rate", type = "float", default =".15")
 
 (options, args) = parser.parse_args()
