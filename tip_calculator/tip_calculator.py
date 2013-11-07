@@ -3,11 +3,17 @@
 #meal_cost = 20.00
 #tax_rate = .15 #15%
 #tip_rate = .15
+from sys import argv
 
 def tip_calculator():
-    meal_cost = float(raw_input("Please enter your pre tax and tip meal cost: "))
-    tax_rate = float(raw_input("Please provide your tax rate as a decimal: "))
-    tip_rate = float(raw_input("Please provide your desired tip rate as a decimal: "))
+    #argv
+    meal_cost = float(argv[1])
+    tax_rate = float(argv[2])
+    tip_rate = float(argv[3])
+    #user_inputs
+    #meal_cost = float(raw_input("Please enter your pre tax and tip meal cost: "))
+    #tax_rate = float(raw_input("Please provide your tax rate as a decimal: "))
+    #tip_rate = float(raw_input("Please provide your desired tip rate as a decimal: "))
     print "The base cost of your meal was $%.2f" % meal_cost
     tax = meal_cost*tax_rate
     print "You need to pay $%.2f" % tax
