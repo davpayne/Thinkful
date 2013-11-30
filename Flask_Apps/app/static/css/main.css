@@ -1,20 +1,41 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Nunito", Helvetica, Arial, sans-serif;
     color: #444;
 }
 
+.profile_picture {
+    max-width: 30%;
+    display: block;
+    display: inline;
+    float: left;
+    margin: 1em;
+}
+
+a {
+    text-decoration: none;
+}
 /*
  * Create a dark grey header with a white logo
  */
 
 header {
-    background-color: #2B2B2B;
-    height: 35px;
+    background-color: #036312;
+    height: 2.25em;
     width: 100%;
     opacity: .9;
     margin-bottom: 10px;
+    position: fixed;
+}
+
+footer {
+    background-color: #036312;
+    height: 7em;
+    width: 100%;
+    opacity: .9;
+    bottom: 0;
+    padding: 1em;
 }
 
 header h1.logo {
@@ -35,13 +56,17 @@ header h1.logo:hover {
  */
 
  .container {
-    width: 940px;
+    width: 100%;
     margin: 0 auto;
 }
 
-div.jumbo {
-    padding: 10px 0 30px 0;
-    background-color: #eeeeee;
+div.toppush {
+    height: 2.5em;
+    width: 100%;
+}
+
+div.content {
+    padding: 10px 30px;
     -webkit-border-radius: 6px;
         -moz-border-radius: 6px;
             border-radius: 6px;
@@ -49,7 +74,7 @@ div.jumbo {
 
 h2 {
     font-size: 3em;
-    margin-top: 40px;
+    margin-top: 2em;
     text-align: center;
     letter-spacing: -2px;
 }
@@ -57,11 +82,40 @@ h2 {
 h3 {
     font-size: 1.7em;
     font-weight: 100;
-    margin-top: 30px;
+    margin-top: .3em;
     text-align: center;
     letter-spacing: -1px;
     color: #999;
 }
+
+h4 {
+    font-size: 1em;
+    text-align: center;
+    color: #fff;
+}
+
+/*
+ * Control the Contact section
+ */
+div#moreinfo {
+    margin-top: 4em;
+    border-top: 2em;
+    float: bottom;
+    text-align: center;
+    display: inline;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#moreinfo h2 {
+    font-size: 1.5em;
+}
+
+.icon {
+    max-width: 10%;
+}
+
 
 /*
  * Display navigation links inline
@@ -69,7 +123,7 @@ h3 {
 
  .menu {
     float: right;
-    margin-top: 8px;
+    margin: 0;
  }
 
 .menu li {
@@ -77,10 +131,10 @@ h3 {
 }
 
 .menu li + li {
-    margin-left: 35px;
+    margin-left: 2.5em;
 }
 
 .menu li a {
-    color: #999;
+    color: #fff;
     text-decoration: none;
 }

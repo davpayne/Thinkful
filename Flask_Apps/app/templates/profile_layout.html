@@ -2,32 +2,43 @@
 <html>
     <head>
         <title>David Payne</title>
+        <meta charset="UTF-8" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
     </head>
     <body>
         <header>
             <div class="container">
-                <h1 class="logo">Profile</h1>
+                <h1 class="logo">David's Profile</h1>
                 <strong><nav>
                     <ul class="menu">
                         <li><a href="{{ url_for('home') }}">Home</a></li>
                         <li><a href="{{ url_for('portfolio') }}">Portfolio</a></li>
                         <li><a href="{{ url_for('quotes') }}">Favorite Quotes</a></li>
-                        <li><a href="{{ url_for('map') }}">Map</a></li>
                     </ul>
                 </nav></strong>
             </div>
         </header>
-
-        <div class="container">
+        <div class="toppush">
+        </div>
+        <div class="content">
             {% block content %}
             {% endblock %}
         </div>
-        <footer>
-            <div class="container">
-                {% block quote %}
-                {% endblock %}
+        <div id="moreinfo">
+            <div class="page-title">
+                <h2>Contact David</h2>
             </div>
+            <p>
+                David currently lives in Houston, TX. If you have any questions or would just like to get in touch, please send an email. He'd love to hear from you. 
+            </p>
+            <a href="mailto:dpayne162@gmail.com?Subject=Hello%20David" target="_blank"><img class="icon" src="static/img/email.png"></a>
+            <a href="https://github.com/davpayne" target="_blank"><img class="icon" src="static/img/github.png" /></a>
+            <a href="http://www.linkedin.com/in/davpayne" target="_blank"><img class="icon" src="static/img/linkedin.png" /></a>
+        </div>
+        <footer>
+            {% block quote %}
+            {% endblock %}
         </footer>
     </body>
 </html>
