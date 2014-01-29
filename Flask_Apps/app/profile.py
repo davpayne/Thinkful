@@ -10,10 +10,6 @@ def home():
 def portfolio():
 	return render_template("portfolio.html")
 
-@app.route('/map')
-def map():
-	return render_template("map.html")
-
 @app.route('/quotes')
 def quotes():
     return render_template("quotes.html")
