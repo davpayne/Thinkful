@@ -1,0 +1,45 @@
+<div class="paddinglr10">
+  <h1>A simple potluck planning app</h1>
+  <form>
+    <fieldset>
+      <input type="text" placeholder="Event Name" size=50/>
+      <input type="text" placeholder="Your Name" size=50/>
+      <input type="text" placeholder="Password(Optional)" size=50/>
+    </fieldset>
+  </form>
+<div>
+    <h4>Choose the event date</h4>
+    <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+    <div style="display:inline-block; min-height:290px;">
+      <div class="well well-sm" ng-model="dt">
+          <datepicker min="minDate" show-weeks="showWeeks"></datepicker>
+      </div>
+    </div>
+</div>
+<div>
+  <div ng-model="mytime" ng-change="changed()" style="display:inline-block;">
+        <timepicker hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+  </div>
+
+  
+   <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+
+  <div class="row"> 
+    <div class="col-xs-6">
+        Hours step is:
+      <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
+    </div>
+    <div class="col-xs-6">
+        Minutes step is:
+      <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
+    </div>
+  </div>
+
+  <hr>
+
+  <button class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
+  <button class="btn btn-default" ng-click="update()">Set to 14:00</button>
+  <button class="btn btn-danger" ng-click="clear()">Clear</button>
+</div>
+<a href="#/party"><button class="btn">Create Event</button></a>
+</div>

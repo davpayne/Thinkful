@@ -1,8 +1,14 @@
-angular
-    .module('PartyApp', [])
-    .config(['$routeProvider', function($routeProvider) {
+var app = angular.module('PartyApp', [
+    'ngRoute', 'ui.bootstrap']);
+
+    app.config(['$routeProvider', 
+        function($routeProvider) {
         $routeProvider
             .when('/', {
+                templateUrl: '../static/home.html',
+                controller: 'HomePageController',
+            })
+            .when('/party', {
                 templateUrl: '../static/party.html',
                 controller: 'PartyController'
             })
@@ -12,17 +18,62 @@ angular
             })
             .otherwise({ redirectTo: '/' });
     }])
-    .factory('windowAlert', [
-        '$window',
-        function($window) {
-            return $window.alert;
-        }
-    ])
+
     .controller('PartyController', [
         '$scope',
         '$http',
-        'windowAlert',
         function($scope, $http, windowAlert) {
+            $scope.RETRIEVE_DEFAULT_NR = 5;
+            $scope.state = {};
+            $scope.state.partyList = [];
+            $scope.state.retrieveNr = $scope.RETRIEVE_DEFAULT_NR;
+            $scope.state.pageName = 'partyList';
+            /*$scope.state.categories = [
+                {name: 'Food'},
+                {name: 'Beverages'},
+                {name: 'Miscellaneous'}
+                }];*/
+            $scope.addItem = function() {
+                if (!$scope.state.newItem) {
+                     $http
+                        .post('/partyAdd', {
+                            item: $scope.state.newItem
+                        })
+                        .success(function(data, status, headers, config) {
+                            if (data.success) {
+                                $scope.retrieveCategory(
+                                    $scope.state.retrieveNr
+                                );
+                            }
+                        })
+                        .error(function(data, status, headers, config) {
+                        });
+                } 
+            };
+
+            $scope.retrieveCategory = function(n) {
+                $http
+                    .get('/partyRetrieve/' + n)
+                    .success(function(data, status, headers, config) {
+                        if (data.success) {
+                            $scope.state.partyList = data.partyList;
+                        } 
+                    })
+                    .error(function(data, status, headers, config) {
+                    });
+            };
+
+            $scope.setAndRetrieveCategory = function(n) {
+                $scope.state.retrieveNr = n;
+                $scope.retrieveCategory($scope.state.retrieveNr);
+            };
+        }
+    ])
+    /*
+    .controller('PartyController', [
+        '$scope',
+        '$http',
+        function($scope, $http) {
             $scope.RETRIEVE_DEFAULT_NR = 5;
             $scope.state = {};
             $scope.state.partyList = [];
@@ -30,9 +81,7 @@ angular
             $scope.state.pageName = 'partyList';
 
             $scope.addItem = function() {
-                if (!$scope.state.newItem) {
-                    windowAlert("text field must be non-empty");
-                } else {
+                if ($scope.state.newItem) {
                     $http
                         .post('/partyAdd', {
                             item: $scope.state.newItem
@@ -42,9 +91,7 @@ angular
                                 $scope.retrieveCategory(
                                     $scope.state.retrieveNr
                                 );
-                            } else {
-                                windowAlert('Adding of item failed');
-                            }
+                            } 
                         })
                         .error(function(data, status, headers, config) {
                         });
@@ -57,12 +104,9 @@ angular
                     .success(function(data, status, headers, config) {
                         if (data.success) {
                             $scope.state.partyList = data.partyList;
-                        } else {
-                            windowAlert('Retrieval failed');
-                        }
+                        } 
                     })
                     .error(function(data, status, headers, config) {
-                        windowAlert("Retrieval failed");
                     });
             };
 
@@ -71,7 +115,7 @@ angular
                 $scope.retrieveCategory($scope.state.retrieveNr);
             };
         }
-    ])
+    )]*/
     .directive('navtabs', function() {
         return {
             restrict: 'E',
@@ -92,6 +136,7 @@ angular
             ]
         };
     })
+
     .directive('tab', function() {
         return {
             require: '^navtabs',
@@ -108,22 +153,14 @@ angular
             }
         };
     })
-    .controller('SecondController', [
-        '$scope',
-        function($scope) {
-            $scope.state = {};
-            $scope.state.pageName = 'secondPage';
-        }
-    ])
-    /*.controller('CategoryController', [
-        '$scope',
-        function($scope) {
-            $scope.state = [
-                {name: 'Food'},
-                {name: 'Beverages'},
-                {name: 'Miscellaneous'}];
-            $scope.toggleActive = function(s){
-                s.active = !s.active
-            }
-        ])*/
+
+    function SecondController($scope){
+        $scope.state = {};
+        $scope.state.pageName = 'secondPage';
+    }
+    
+    function HomePageController($scope){
+        $scope.state = {};
+        $scope.state.pageName = 'homePage';
+    }
     ;
