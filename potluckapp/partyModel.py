@@ -14,7 +14,7 @@ class PartyModel:
         _conn.commit()
 
     @classmethod
-    def retrieve_category(cls, n):
+    def retrieve_category(cls):
         rows = _cursor.execute(
             'SELECT text FROM party ORDER BY id DESC LIMIT ?', (n, )
         )

@@ -17,14 +17,8 @@ class PartyAdd(flask.views.MethodView):
         return jsonify({ 'success': True })
 
 class PartyRetrieve(flask.views.MethodView):
-    def get(self, n):
-        try:
-            n = int(n)
-        except ValueError:
-            n = RETRIEVE_DEFAULT_NR
-        if n <= 0:
-            n = RETRIEVE_DEFAULT_NR
-        partyList = PartyModel.retrieve_category(n)
+    def get(self):
+        partyList = PartyModel.retrieve_category()
         return jsonify({
             'success': True,
             'partyList': [{ 'text': item } for item in partyList]
