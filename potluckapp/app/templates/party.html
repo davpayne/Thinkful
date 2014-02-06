@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% include 'navtabs.html' %}
+<div class="paddinglr10">
+  <h1>Event: {{event.name}}</h1>
+  <form action="" method="post" name="create_item">
+    {{form.hidden_tag()}}
+    Your Name: {{form.person(placeholder = "Type your name here", size=50)}}
+    Add item: {{form.body(placeholder = "Add something", size=50)}}
+    <input class="btn btn-primary" type="submit"/>
+  </form>
+  <br>
+  <br>
+  <!--
+  <button class="btn" ng-click="">
+  Food
+  </button>
+  <button class="btn" ng-click="">
+  Beverages
+  </button>
+  <button class="btn" ng-click="">
+  Miscellaneous
+  </button>-->
+  <table class="table">
+    <thead>
+      <th>Number</th>
+      <th>Item</th>
+      <th>Who's bringing it?</th>
+      <th>Delete?</th>
+    </thead>
+    <tbody>
+      {% for item in event.items.all() %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ item.body }}</td>
+        <td>{{ item.person }}</td>
+        <td>
+          <a href="{{ url_for('delete_item', item_id = item.id) }}">Delete</a>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

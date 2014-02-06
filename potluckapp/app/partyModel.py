@@ -1,32 +1,19 @@
 from app import db
-from uuid import uuid4
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(64))
-    #have to change date time
-    #event_date = db.Column(db.String(64))
-    #attendees = db.relationship('Attendee', backref= 'author', lazy = 'dynamic')
-    #about_me = db.Column(db.String(140))
-    #last_seen = db.Column(db.DateTime)
+    items = db.relationship('Item', backref = 'event', lazy = 'dynamic')
 
     def __repr__(self):
         return '<Event %r>' % (self.name) 
 
-class PartyModel:
-    def __init__(self):
-        pass
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    body = db.Column(db.String(140))
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    category = db.Column(db.String(20))
+    person = db.Column(db.String(140))
 
-    @classmethod
-    def add_item(cls, item):
-        pass
-        """_cursor.execute('INSERT INTO party(text) VALUES(?)', (item, ))
-        _conn.commit()
-"""
-    @classmethod
-    def retrieve_category(cls):
-        pass
-        """rows = _cursor.execute(
-            'SELECT text FROM party ORDER BY id DESC LIMIT ?', (n, )
-        )
-        return [r['text'] for r in rows]"""
+    def __repr__(self): 
+        return '<Post %r>' % (self.body)

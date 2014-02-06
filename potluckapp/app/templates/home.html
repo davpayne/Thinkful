@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% include 'navtabs.html' %}
+<div class="paddinglr10" align="center">
+  <h1>The simple potluck planning app</h1>
+  <form action="" method="post" name="create_event">
+    {{form.hidden_tag()}}
+    <fieldset>
+      {{form.name(placeholder = "Name of Your Event", size = 50)}}
+    </fieldset>
+    <br>
+    <input class="btn btn-primary" type="submit" value = "Create Event"/>
+  </form>
+</div>
+{% endblock content %}
