@@ -17,7 +17,7 @@ a {
     text-decoration: none;
 }
 /*
- * Create a dark grey header with a white logo
+ * Create a green header with a white logo
  */
 
 header {
@@ -106,6 +106,7 @@ div#moreinfo {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 7px;
 }
 
 #moreinfo h2 {
@@ -120,10 +121,11 @@ div#moreinfo {
 /*
  * Display navigation links inline
  */
-
- .menu {
+.menu {
     float: right;
     margin: 0;
+    padding-top: 4px;
+    padding-right: 10px;
  }
 
 .menu li {
