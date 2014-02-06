@@ -1,6 +1,6 @@
 var app = angular.module('PartyApp', [
     'ngRoute', 'ui.bootstrap']);
-
+    
     app.config(['$routeProvider', 
         function($routeProvider) {
         $routeProvider
@@ -18,7 +18,15 @@ var app = angular.module('PartyApp', [
             })
             .otherwise({ redirectTo: '/' });
     }])
-
+    /*
+    function PartyController($scope){
+        $scope.RETRIEVE_DEFAULT_NR = 5;
+        $scope.state = {};
+        $scope.state.partyList = [];
+        $scope.state.retrieveNr = $scope.RETRIEVE_DEFAULT_NR;
+        $scope.state.pageName = 'partyList';
+    }*/
+    
     .controller('PartyController', [
         '$scope',
         '$http',
@@ -27,12 +35,12 @@ var app = angular.module('PartyApp', [
             $scope.state = {};
             $scope.state.partyList = [];
             $scope.state.retrieveNr = $scope.RETRIEVE_DEFAULT_NR;
-            $scope.state.pageName = 'partyList';
-            /*$scope.state.categories = [
+            $scope.state.pageName = 'partyList';}])/*
+            $scope.state.categories = [
                 {name: 'Food'},
                 {name: 'Beverages'},
                 {name: 'Miscellaneous'}
-                }];*/
+                }];
             $scope.addItem = function() {
                 if (!$scope.state.newItem) {
                      $http

@@ -1,22 +1,28 @@
 <navtabs page-name="state.pageName"></navtabs>
 <div class="paddinglr10">
   <h1>A simple potluck planning app</h1>
-  <form ng-submit="addItem()">
-    <fieldset>
-      <input type="text" placeholder="Add something" size=50 ng-model="state.newItem" />
-      <button class="btn btn-primary">Add item</button>
-    </fieldset>
-  </form>
+  Your Name: <input type="text" placeholder="Type your name to add items" size = 50 ng-model="state.textbox"/>
+  <div ng-show="state.textbox.length > 0">
+    <!--<form ng-submit="addItem()">-->
+    <form>
+      <fieldset>
+        <input type="text" placeholder="Add something" size=50 ng-model="state.newItem" />
+        <button class="btn btn-primary">Add item</button>
+      </fieldset>
+    </form>
+  </div>
+  <br>
+  <br>
   <!--<button ng-repeat="category in categories" ng-click="toggleActive(category)" ng-class="{active:category.active}">
   {{category.name}}
   </button>-->
-  <button class="btn" ng-click="setAndRetrieveCategory(5)">
+  <button class="btn" ng-click="">
   Food
   </button>
-  <button class="btn" ng-click="setAndRetrieveCategory(10)">
+  <button class="btn" ng-click="">
   Beverages
   </button>
-  <button class="btn" ng-click="setAndRetrieveCategory(15)">
+  <button class="btn" ng-click="">
   Miscellaneous
   </button>
   

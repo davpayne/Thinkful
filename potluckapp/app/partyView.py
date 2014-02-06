@@ -1,11 +1,23 @@
 from flask import request, jsonify, render_template
-from partyModel import PartyModel
-
+from partyModel import PartyModel, Event
+from app import app, db
+from forms import CreateEvent
 import flask.views
 import json
 
 RETRIEVE_DEFAULT_NR = 5
+@app.route('/', methods = ['GET', 'POST'])
+def home():
+    form = CreateEvent()
+    if form.validate_on_submit():
+        event = Event(name = form.post.data)
+        db.session.add(event)
+        db.session.commit()
+        return redirect('#/party')
+    return render_template('main.html',
+        form = form)
 
+#@app.route('/party')
 class PartyView(flask.views.MethodView):
     def get(self):
         return render_template('main.html')
