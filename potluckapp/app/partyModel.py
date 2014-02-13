@@ -10,10 +10,10 @@ class Event(db.Model):
 
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    body = db.Column(db.String(140))
+    body = db.Column(db.String(40))
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
     category = db.Column(db.String(20))
-    person = db.Column(db.String(140))
+    person = db.Column(db.String(40))
 
     def __repr__(self): 
         return '<Post %r>' % (self.body)

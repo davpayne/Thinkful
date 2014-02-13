@@ -2,13 +2,17 @@
 
 {% block content %}
 {% include 'navtabs.html' %}
-<div class="paddinglr10">
+<div class="paddinglr10" id="eventpage">
   <h1>Event: {{event.name}}</h1>
-  <form action="" method="post" name="create_item">
+  <p>Let others contribute to the event by<a href="mailto:?Subject=What%20are%20you bringing to {{event.name}}?&body=Hi%20all,%0D%0A%0D%0AGet excited for {{event.name}}! Let us know what you can bring by visiting: http//www.mangopotluck.herokuapp.com/party/{{event.id}}_{{event.name}}" target="_top">
+emailing them</a> or just direct them to: http//www.mangopotluck.herokuapp.com/party/{{event.id}}_{{event.name}}</p>
+
+  <form class = "form-inline" action="" method="post" name="create_item">
     {{form.hidden_tag()}}
-    Your Name: {{form.person(placeholder = "Type your name here", size=50)}}
-    Add item: {{form.body(placeholder = "Add something", size=50)}}
-    <input class="btn btn-primary" type="submit"/>
+    Your Name: {{form.person(placeholder = "Type your name here", size=40)}}
+    Add item: {{form.body(placeholder = "Add something", size=40)}}
+    {{form.event_id}}
+    <input class="btn btn-primary" type="submit" id="additem"/>
   </form>
   <br>
   <br>
@@ -31,15 +35,33 @@
     </thead>
     <tbody>
       {% for item in event.items.all() %}
-      <tr>
-        <td>{{ loop.index }}</td>
-        <td>{{ item.body }}</td>
-        <td>{{ item.person }}</td>
+      <tr class="items">
+        <td name="index">{{ loop.index }}</td>
+        <td name="itembody">{{ item.body }}</td>
+        <td name="personbody">{{ item.person }}</td>
         <td>
-          <a href="{{ url_for('delete_item', item_id = item.id) }}">Delete</a>
+          <a name = "delete" href="{{ url_for('delete_item', item_id = item.id) }}">Delete</a>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+  <!--<script>
+    function additem(event) {
+      event.preventDefault();
+      var event_id = $("#event_id")[0].value;
+      var person = $("#person")[0].value;
+      var body = $("#body")[0].value;
+      $.post('/additem',{
+        event_id: event_id,
+        person : person,
+        body : body
+      }).done(function(added) {
+          $('#event').data(added['event_id'])
+      });
+    }
+    $(document).ready(function(){
+      $('#additem').click(additem);
+    });
+  </script>-->
 {% endblock content %}

@@ -25,6 +25,7 @@ def party(id, name):
         db.session.add(item)
         db.session.commit()
         return redirect(url_for('party', id = event.id, name = event.name))
+    form.event_id.data = event.id
     return render_template('party.html',
         event = event,
         form = form)
@@ -40,3 +41,12 @@ def delete_item(item_id):
     db.session.execute('delete from Item where id=' + item_id)
     db.session.commit()
     return redirect(url_for('party', id = event.id, name = event.name))
+
+@app.route('/additem', methods = ['POST'])
+def add_item():
+    item = Item(event_id=request.form['event_id'], person=request.form['person'], body=request.form['body'])
+    event = db.session.query(Event).get(request.form['event_id'])
+    db.session.add(item)
+    db.session.commit()
+    #return jsonify({'event' : event})
+    return jsonify(event_id=request.form['event_id'], person=request.form['person'], body=request.form['body'])

@@ -4,13 +4,17 @@
 {% include 'navtabs.html' %}
 <div class="paddinglr10" align="center">
   <h1>The simple potluck planning app</h1>
-  <form action="" method="post" name="create_event">
+  <p>Just give your event a name, hit 'Create Event'<br>
+    Add what you're bringing. <br>
+    Then send out the unique url to all other attendees so they can add what they're bringing.<br>
+    That is it. No log-in or email address required.</p>
+  <form method="post" name="create_event">
     {{form.hidden_tag()}}
     <fieldset>
-      {{form.name(placeholder = "Name of Your Event", size = 50)}}
+      <span name="event_name">{{form.name(placeholder = "Name of Your Event", size = 50)}}</span>
     </fieldset>
     <br>
-    <input class="btn btn-primary" type="submit" value = "Create Event"/>
+    <input class="btn btn-primary" type="submit" value = "Create Event" id="createEvent"/>
   </form>
 </div>
 {% endblock content %}
